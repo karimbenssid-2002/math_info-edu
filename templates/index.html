@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - {{ user.Niveau_Classe }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="nav-brand">Plateforme Éducative</div>
+        <div class="nav-user">
+            Bonjour, {{ user.Nom }} ({{ user.Niveau_Classe }})
+            <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <h1>Vos Cours Disponibles</h1>
+
+        <div class="subjects-grid">
+            <!-- Mathématiques -->
+            <div class="subject-card">
+                <h2>Mathématiques</h2>
+                {% if courses['Mathématiques'] %}
+                <ul class="course-list">
+                    {% for course in courses['Mathématiques'] %}
+                    <li>
+                        <a href="{{ url_for('view_course', matiere='Mathématiques', chapitre=course) }}">
+                            {{ course.replace('_', ' ') }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="empty-msg">Aucun cours de mathématiques disponible pour votre niveau.</p>
+                {% endif %}
+            </div>
+
+            <!-- Informatique -->
+            <div class="subject-card">
+                <h2>Informatique</h2>
+                {% if courses['Informatique'] %}
+                <ul class="course-list">
+                    {% for course in courses['Informatique'] %}
+                    <li>
+                        <a href="{{ url_for('view_course', matiere='Informatique', chapitre=course) }}">
+                            {{ course.replace('_', ' ') }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="empty-msg">Aucun cours d'informatique disponible pour votre niveau.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-color: #f1f5f9;
+    --card-bg: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+/* === LOGIN PAGE === */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.error-msg {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* === NAVBAR === */
+.navbar {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-logout {
+    background-color: white;
+    color: var(--primary-color);
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-left: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.btn-logout:hover {
+    background-color: #f8fafc;
+}
+
+/* === DASHBOARD === */
+.dashboard-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.subjects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.subject-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.subject-card h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.course-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.course-list li {
+    margin-bottom: 10px;
+}
+
+.course-list a {
+    text-decoration: none;
+    color: var(--text-main);
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.course-list a:hover {
+    background-color: #f8fafc;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.empty-msg {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* === COURSE VIEW === */
+.course-container {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    min-height: calc(100vh - 120px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.breadcrumb {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.markdown-content {
+    line-height: 1.6;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+    color: var(--text-main);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.markdown-content pre {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.markdown-content code {
+    background-color: #e2e8f0;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: monospace;
+    color: #b91c1c;
+}
+
+.markdown-content pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+}
+
+.markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+.markdown-content th {
+    background-color: #f8fafc;
+}
+
+/* === PYSCRIPT OVERRIDES === */
+
+/* Masquer le gros terminal noir en bas de page */
+py-terminal,
+.py-terminal {
+    display: none !important;
+}
+
+py-repl {
+    display: block !important;
+}
+
+/* On utilise le positionnement relatif sur la box principale pour servir d'ancre */
+.py-repl-box {
+    display: block !important;
+    position: relative !important;
+    margin-top: 50px !important;
+    /* Place réservée pour le bouton au-dessus */
+    background-color: white !important;
+    /* optionnel pour le style */
+}
+
+/* Redesigner le bouton "run" et le placer précisément en haut à gauche de la box (en dehors) */
+.py-repl-run-button {
+    position: absolute !important;
+    top: -45px !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 8px 20px !important;
+    background-color: var(--primary-color) !important;
+    border-radius: 5px !important;
+    border: none !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 0.95rem !important;
+    cursor: pointer !important;
+    transition: 0.2s !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 100 !important;
+}
+
+/* Masquer l'icône SVG par défaut */
+.py-repl-run-button svg {
+    display: none !important;
+}
+
+/* Ajouter le texte "Executer" à la place de l'icône */
+.py-repl-run-button::after {
+    content: "Exécuter";
+}
+
+.py-repl-run-button:hover {
+    background-color: var(--primary-hover) !important;
+    transform: scale(1.05);
+}

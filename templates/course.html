@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ chapitre.replace('_', ' ') }} - {{ matiere }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    {% if is_informatique %}
+    <!-- Intégration de PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+    <style>
+        .pyscript-terminal {
+            margin-top: 30px;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f8fafc;
+        }
+
+        .pyscript-terminal h3 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+    </style>
+    {% endif %}
+
+    <!-- Intégration de MathJax pour le rendu des formules Mathématiques -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+        </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}" style="color: white; text-decoration: none;">&larr; Retour au tableau de
+                bord</a>
+        </div>
+        <div class="nav-user">
+            {{ user.Nom }} ({{ user.Niveau_Classe }})
+            <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
+        </div>
+    </header>
+
+    <main class="course-container">
+        <div class="breadcrumb">
+            {{ matiere }} / {{ user.Niveau_Classe }} / <strong>{{ chapitre.replace('_', ' ') }}</strong>
+        </div>
+
+        <article class="markdown-content">
+            {{ content|safe }}
+        </article>
+
+        {% if is_informatique %}
+        <section class="pyscript-terminal">
+            <h3>Console Interactive Python (PyScript)</h3>
+            <p>Utilisez cette console pour tester votre code Python directement dans le navigateur. Écrivez votre script
+                ci-dessous, puis cliquez sur le bouton <strong>Exécuter</strong>.</p>
+
+            <!-- PyScript Editor -->
+            <py-repl></py-repl>
+        </section>
+        {% endif %}
+    </main>
+</body>
+
+</html>

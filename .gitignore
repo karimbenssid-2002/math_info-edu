@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+
+# Ignorer éventuellement le fichier excel si on ne veut pas l'open-sourcer 
+# (mais pour Render/Heroku, s'il contient les users, il faut le garder ou utiliser une DB)
+# eleves.xlsx 
+
+.env
+.idea/
+.vscode/
+.DS_Store
