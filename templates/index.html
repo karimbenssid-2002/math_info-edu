@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - {{ user.Niveau_Classe }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=responsive">
     <!-- Prévenir le clignotement blanc (FOUC) en appliquant le thème immédiatement -->
     <script>
         const savedTheme = localStorage.getItem('theme') || 'light';
@@ -17,9 +17,26 @@
     <header class="navbar">
         <div class="nav-brand">Plateforme Éducative</div>
         <div class="nav-actions">
-            <button id="theme-toggle" class="theme-toggle" title="Changer de thème">
-                <span class="icon-sun">☀️</span>
-                <span class="icon-moon">🌙</span>
+            <button id="theme-toggle" class="theme-toggle" title="Changer de thème" aria-label="Toggle theme">
+                <div class="toggle-track">
+                    <div class="toggle-thumb"></div>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </div>
             </button>
             <div class="nav-user">
                 Bonjour, {{ user.Nom }} ({{ user.Niveau_Classe }})
