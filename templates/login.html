@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Plateforme Éducative</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </head>
+
 <body class="login-body">
+    <div class="login-header">
+        <button id="theme-toggle" class="theme-toggle" title="Changer de thème">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+        </button>
+    </div>
     <div class="login-container">
         <h1>Connexion</h1>
         {% if error %}
-            <div class="error-msg">{{ error }}</div>
+        <div class="error-msg">{{ error }}</div>
         {% endif %}
         <form method="POST" action="{{ url_for('login') }}">
             <div class="form-group">
@@ -24,5 +36,7 @@
             <button type="submit" class="btn">Se connecter</button>
         </form>
     </div>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
 </body>
+
 </html>

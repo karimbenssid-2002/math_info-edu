@@ -6,14 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - {{ user.Niveau_Classe }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Prévenir le clignotement blanc (FOUC) en appliquant le thème immédiatement -->
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
 </head>
 
 <body>
     <header class="navbar">
         <div class="nav-brand">Plateforme Éducative</div>
-        <div class="nav-user">
-            Bonjour, {{ user.Nom }} ({{ user.Niveau_Classe }})
-            <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle" title="Changer de thème">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+            <div class="nav-user">
+                Bonjour, {{ user.Nom }} ({{ user.Niveau_Classe }})
+                <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
+            </div>
         </div>
     </header>
 
@@ -58,6 +69,7 @@
             </div>
         </div>
     </main>
+    <script src="{{ url_for('static', filename='theme.js') }}"></script>
 </body>
 
 </html>
