@@ -20,16 +20,13 @@
     --text-muted: #86868b;
     --border-color: rgba(0, 0, 0, 0.1);
 
-    /* Variables structurelles (Shadows, radius) */
-    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+    /* Variables structurelles */
+    /* Shadow definitions */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --radius-lg: 16px;
     --radius-md: 12px;
     --radius-sm: 8px;
-
-    /* Theme toggle icons */
-    --display-sun: none;
-    --display-moon: inline;
 }
 
 [data-theme="dark"] {
@@ -56,10 +53,6 @@
     /* Shadows are softer/darker in dark mode */
     --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.5);
-
-    /* Theme toggle icons */
-    --display-sun: inline;
-    --display-moon: none;
 }
 
 /* === GLOBALS === */
@@ -91,32 +84,82 @@ a:hover {
 }
 
 /* === THEME TOGGLE BUTTON === */
+/* Nouvelle bascule de thème (Pill Slider) */
 .theme-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.4rem;
-    padding: 5px;
-    border-radius: 50%;
+    padding: 0;
+    margin-right: 1.5rem;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.toggle-track {
+    width: 68px;
+    height: 34px;
+    background-color: #f1f2f5;
+    border-radius: 34px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, background-color 0.2s;
-    color: var(--text-main);
+    justify-content: space-between;
+    padding: 0 8px;
+    box-sizing: border-box;
+    transition: background-color 0.4s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.theme-toggle:hover {
-    background-color: rgba(128, 128, 128, 0.1);
-    transform: scale(1.1);
+[data-theme="dark"] .toggle-track {
+    background-color: #1c1c1e;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 28px;
+    height: 28px;
+    background-color: #3b4bc4;
+    border-radius: 50%;
+    transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 1;
+}
+
+[data-theme="dark"] .toggle-thumb {
+    transform: translateX(34px);
+}
+
+.icon-sun,
+.icon-moon {
+    width: 16px;
+    height: 16px;
+    z-index: 2;
+    transition: color 0.4s ease;
+}
+
+/* Couleurs des icônes selon le mode */
 .icon-sun {
-    display: var(--display-sun);
+    color: #ffffff;
+    /* Actif, dans le cercle bleu */
 }
 
 .icon-moon {
-    display: var(--display-moon);
+    color: #a1a1a6;
+    /* Inactif, gris */
 }
+
+[data-theme="dark"] .icon-sun {
+    color: #6e6e73;
+    /* Inactif, gris foncé */
+}
+
+[data-theme="dark"] .icon-moon {
+    color: #ffffff;
+    /* Actif, dans le cercle bleu */
+}
+
 
 /* === LOGIN PAGE === */
 .login-body {
@@ -583,4 +626,79 @@ span.cm-activeLine,
    On colore en blanc tout ce qui n'est PAS spécifiquement une string, un keyword ou un nombre. */
 [data-theme="dark"] .cm-editor .cm-content span:not([class*="string"]):not([class*="keyword"]):not([class*="number"]):not([class*="operator"]) {
     color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Design Responsive (Tablettes et Mobiles)
+   ========================================================================== */
+
+/* Écrans moyens / Tablettes (< 1024px) */
+@media screen and (max-width: 1024px) {
+
+    .dashboard-container,
+    .course-container {
+        padding: 30px 20px;
+    }
+
+    .subjects-grid {
+        gap: 20px;
+    }
+}
+
+/* Petits écrans / Smartphones (< 768px) */
+@media screen and (max-width: 768px) {
+
+    /* 1. Navbar : on empile le contenu si besoin ou on réduit les paddings */
+    .navbar {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* 2. Typographie : réduction globale */
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-container h1 {
+        font-size: 1.8rem;
+    }
+
+    /* 3. Containers et Espacements : réduction drastique pour maximiser la largeur */
+    .dashboard-container,
+    .course-container {
+        padding: 20px 15px;
+        margin: 20px auto;
+        border-radius: var(--radius-md);
+    }
+
+    .login-container {
+        padding: 30px 20px;
+        width: 90%;
+    }
+
+    /* 4. Grille : on passe d'un affichage côte-à-côte (2 cols) à vertical (1 col) */
+    .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* 5. CodeBlocks & PyScript : Scroll horizontal pour ne pas deborder de l'ecran */
+    .markdown-content pre,
+    .py-repl-box {
+        overflow-x: auto;
+        width: 100%;
+        border-radius: var(--radius-sm);
+        padding: 12px;
+    }
+
+    .py-editor-run-button {
+        padding: 6px 15px !important;
+        font-size: 0.9rem !important;
+    }
 }
