@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Plateforme Éducative</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=responsive">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_v2.css') }}?v=20260228">
     <script>
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
@@ -37,7 +37,14 @@
         </button>
     </div>
     <div class="login-container">
-        <h1>Connexion</h1>
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="vertical-align: middle; margin-right: 8px; color: var(--primary-color)">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+            </svg>
+            Connexion
+        </h1>
         {% if error %}
         <div class="error-msg">{{ error }}</div>
         {% endif %}

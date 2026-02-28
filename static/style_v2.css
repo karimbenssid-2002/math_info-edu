@@ -17,16 +17,17 @@
     /* Typography */
     --text-main: #1d1d1f;
     /* Noir Apple */
-    --text-muted: #86868b;
+    --text-muted: #64748b;
+    /* Adjusted for better contrast 4.5:1 */
     --border-color: rgba(0, 0, 0, 0.1);
 
     /* Variables structurelles */
-    /* Shadow definitions */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --radius-lg: 16px;
-    --radius-md: 12px;
-    --radius-sm: 8px;
+    /* Premium Glassmorphism Shadows */
+    --shadow-sm: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --shadow-md: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
 }
 
 [data-theme="dark"] {
@@ -45,19 +46,22 @@
     --nav-bg: rgba(28, 28, 30, 0.90);
 
     /* Typography */
-    --text-main: #f5f5f7;
-    /* Blanc cassé Apple */
-    --text-muted: #98989d;
-    --border-color: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    /* Blanc premium */
+    --text-muted: #94a3b8;
+    /* Adjusted for better contrast 4.5:1 */
+    --border-color: rgba(255, 255, 255, 0.15);
 
     /* Shadows are softer/darker in dark mode */
-    --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 12px 40px 0 rgba(0, 0, 0, 0.7);
 }
 
 /* === GLOBALS === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
     background: var(--bg-gradient);
     background-color: var(--bg-color);
     background-size: cover;
@@ -70,6 +74,7 @@ body {
     min-height: 100vh;
     transition: background-color 0.4s ease, color 0.4s ease;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
 }
 
 /* Base Link */
@@ -177,15 +182,20 @@ a:hover {
 
 .login-container {
     background-color: var(--card-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 40px;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 50px 40px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     width: 100%;
-    max-width: 380px;
-    border: 1px solid var(--border-color);
-    transition: background-color 0.4s ease;
+    max-width: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+[data-theme="dark"] .login-container {
+    box-shadow: var(--shadow-md), 0 0 50px rgba(10, 132, 255, 0.15);
+    /* Stronger Glow Effect in dark mode */
 }
 
 .login-container h1 {
@@ -347,15 +357,16 @@ a:hover {
     background-color: var(--card-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 30px;
+    padding: 40px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    transition: box-shadow 0.3s, background-color 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .subject-card:hover {
     box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
 }
 
 .subject-card h2 {
@@ -366,6 +377,13 @@ a:hover {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 15px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.subject-card h2 svg {
+    color: var(--primary-color);
 }
 
 .course-list {
@@ -387,13 +405,14 @@ a:hover {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     font-weight: 500;
-    transition: 0.2s;
+    transition: all 0.3s ease;
 }
 
 .course-list a:hover {
     background-color: rgba(128, 128, 128, 0.08);
     border-color: var(--primary-color);
-    transform: translateX(4px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .empty-msg {
@@ -412,9 +431,13 @@ a:hover {
     -webkit-backdrop-filter: blur(20px);
     border-radius: var(--radius-lg);
     min-height: calc(100vh - 200px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
-    transition: background-color 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.course-container:hover {
+    box-shadow: var(--shadow-md);
 }
 
 .breadcrumb {
