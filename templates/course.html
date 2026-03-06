@@ -59,7 +59,8 @@
 <body>
     <header class="navbar">
         <div class="nav-brand">
-            <a href="{{ url_for('index') }}" class="back-link">&larr; Retour au tableau de bord</a>
+            <a href="{{ url_for('view_chapter', matiere=matiere, nom_chapitre=chapitre_parent) }}"
+                class="back-link">&larr; Retour au chapitre</a>
         </div>
         <div class="nav-actions">
             <button id="theme-toggle" class="theme-toggle" title="Changer de thème" aria-label="Toggle theme">
@@ -90,28 +91,73 @@
         </div>
     </header>
 
-    <main class="course-container">
-        <div class="breadcrumb">
-            {{ matiere }} / {{ user.Niveau_Classe }} / <strong>{{ chapitre.replace('_', ' ') }}</strong>
-        </div>
+    <main class="course-wrapper">
+        <div class="course-layout">
+            {% if toc %}
+            <aside class="course-sidebar">
+                <div class="toc-container">
+                    {{ toc|safe }}
+                </div>
+            </aside>
+            {% endif %}
 
-        <article class="markdown-content">
-            {{ content|safe }}
-        </article>
+            <div class="course-main-content">
+                <div class="course-container">
+                    {% if pdf_filename %}
+                    <a href="{{ url_for('download_pdf', matiere=matiere, chapitre=chapitre, filename=pdf_filename) }}"
+                        class="btn-download-pdf" title="Télécharger le PDF">
+                        <svg viewBox="0 0 64 64" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <filter id="shadow1" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000"
+                                        flood-opacity="0.3" />
+                                </filter>
+                                <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feDropShadow dx="2" dy="2" stdDeviation="1" flood-color="#000000"
+                                        flood-opacity="0.2" />
+                                </filter>
+                            </defs>
 
-        {% if is_informatique %}
-        <section class="pyscript-terminal">
-            <h3>Console Python</h3>
-            <p>Utilisez cette console pour tester votre code Python directement dans le navigateur. Écrivez votre script
-                ci-dessous, puis cliquez sur le bouton <strong>Exécuter</strong>.</p>
+                            <path
+                                d="M18 2 C 16 2, 14 4, 14 6 V 58 C 14 60, 16 62, 18 62 H 58 C 60 62, 62 60, 62 58 V 20 L 44 2 H 18 Z"
+                                fill="#ea2027" />
+                            <path d="M44 2 V 20 H 62 L 44 2 Z" fill="#bd161c" filter="url(#shadow2)" />
 
-            <!-- PyScript 2025 Editor -->
-            <script type="py-editor" id="main-editor">
+                            <rect x="24" y="22" width="26" height="24" fill="#ffffff" rx="1" />
+                            <rect x="27" y="25" width="12" height="7" fill="#ea2027" rx="0.5" />
+                            <rect x="41" y="25" width="6" height="2" fill="#ea2027" rx="0.5" />
+                            <rect x="41" y="30" width="6" height="2" fill="#ea2027" rx="0.5" />
+                            <rect x="27" y="35" width="20" height="2.5" fill="#ea2027" rx="0.5" />
+                            <rect x="27" y="40" width="20" height="2.5" fill="#ea2027" rx="0.5" />
+
+                            <text x="38" y="58" font-family="'Arial Black', system-ui, sans-serif" font-weight="900"
+                                font-size="14" fill="#ffffff" text-anchor="middle">PDF</text>
+                            <path d="M2 38 H 12 V 20 H 24 V 38 H 34 L 18 56 Z" fill="#8c1014" filter="url(#shadow1)" />
+                        </svg>
+                    </a>
+                    {% endif %}
+
+                    <article class="markdown-content">
+                        {{ content|safe }}
+                    </article>
+
+                    {% if is_informatique %}
+                    <section class="pyscript-terminal">
+                        <h3>Console Python</h3>
+                        <p>Utilisez cette console pour tester votre code Python directement dans le navigateur. Écrivez
+                            votre script
+                            ci-dessous, puis cliquez sur le bouton <strong>Exécuter</strong>.</p>
+
+                        <!-- PyScript 2025 Editor -->
+                        <script type="py-editor" id="main-editor">
 # Testez votre code ici !
 print("Bienvenue dans l'éditeur Python !")
-            </script>
-        </section>
-        {% endif %}
+                        </script>
+                    </section>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </main>
     <script src="{{ url_for('static', filename='theme.js') }}"></script>
 

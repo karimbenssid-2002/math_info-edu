@@ -422,10 +422,16 @@ a:hover {
 }
 
 /* === COURSE VIEW === */
-.course-container {
-    padding: 40px;
-    max-width: 800px;
+.course-wrapper {
+    max-width: 1200px;
     margin: 40px auto;
+    padding: 0 20px;
+}
+
+.course-container {
+    position: relative;
+    /* Ancre pour le bouton PDF absolu */
+    padding: 40px;
     background-color: var(--card-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -451,6 +457,29 @@ a:hover {
     color: var(--text-main);
 }
 
+.btn-download-pdf {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 1;
+}
+
+.btn-download-pdf:hover {
+    background-color: transparent;
+    transform: translateY(-4px) scale(1.05);
+}
+
+.btn-download-pdf:active {
+    transform: translateY(0) scale(0.95);
+}
+
 .markdown-content {
     line-height: 1.7;
     font-size: 1.05rem;
@@ -464,6 +493,13 @@ a:hover {
     margin-bottom: 0.5em;
     font-weight: 600;
     letter-spacing: -0.5px;
+}
+
+/* Supprime l'espace au-dessus du premier titre */
+.markdown-content>h1:first-child,
+.markdown-content>h2:first-child,
+.markdown-content>h3:first-child {
+    margin-top: 0;
 }
 
 .markdown-content h1 {
@@ -526,6 +562,15 @@ a:hover {
     font-weight: 600;
 }
 
+/* Encadrés personnalisés (pour théorèmes, définitions, etc.) */
+.markdown-content .bordered-box {
+    border: 2px solid var(--text-main);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+}
+
 /* === PYSCRIPT OVERRIDES (EXACT LOGIC RETAINED) === */
 
 /* Masquer le gros terminal noir en bas de page */
@@ -579,6 +624,110 @@ py-repl {
 }
 
 /* Create space above editor for the absolute run button */
+.pyscript-terminal a[href*="pyodide"],
+.pyscript-terminal a[href*="pyscript"],
+.pyscript-terminal a[href*="micropython"],
+.pyscript-terminal .py-editor-badge,
+.pyscript-terminal .polyscript-badge,
+.pyscript-terminal .py-title {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* === MISE EN PAGE DU COURS (Sommaire + Contenu) === */
+.course-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (min-width: 900px) {
+    .course-layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+        /* Espace entre le menu et le cours principal */
+    }
+
+    .course-sidebar {
+        flex: 0 0 280px;
+        /* Plus large pour que les titres respirent */
+        position: sticky;
+        top: 90px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+        /* Custom scrollbar for webkit */
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-color) var(--card-bg);
+    }
+
+    .course-main-content {
+        flex: 1;
+        min-width: 0;
+        /* Prevents overflow in flex child */
+    }
+}
+
+/* Styling du sommaire (TOC généré par Markdown) */
+.toc-container .toc {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+}
+
+.toc-container .toc-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.toc-container ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.toc-container ul ul {
+    padding-left: 15px;
+    margin-top: 5px;
+    border-left: 1px solid var(--border-color);
+}
+
+.toc-container li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.toc-container a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: block;
+}
+
+.toc-container a:hover {
+    color: var(--primary-color);
+}
+
+/* On mobile, limit TOC height so it doesn't take the whole page */
+@media (max-width: 899px) {
+    .course-sidebar {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+    }
+}
+
 .pyscript-terminal py-editor,
 .pyscript-terminal script[type="py-editor"] {
     display: block;
@@ -659,6 +808,7 @@ span.cm-activeLine,
 @media screen and (max-width: 1024px) {
 
     .dashboard-container,
+    .course-wrapper,
     .course-container {
         padding: 30px 20px;
     }

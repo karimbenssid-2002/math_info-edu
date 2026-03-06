@@ -1,0 +1,221 @@
+<body>
+    <header class="navbar">
+        <div class="nav-brand">
+            <a href="/" class="back-link">← Retour au tableau de bord</a>
+
+        </div>
+
+        <div class="nav-actions">
+            <button id="theme-toggle" class="theme-toggle" title="Changer de thème">
+                <span class="icon-sun">☀️</span>
+
+                <span class="icon-moon">🌙</span>
+
+            </button>
+
+            <div class="nav-user">
+                Alice Dupont (4ème)
+                <a href="/logout" class="btn-logout">Déconnexion</a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="course-container">
+        <div class="breadcrumb">
+            Informatique / 4ème / <strong>Variables Python</strong>
+
+        </div>
+
+
+        <article class="markdown-content">
+            <h1>Les Variables en Python</h1>
+
+<h2>1. Qu'est-ce qu'une variable ?</h2>
+
+<p>Une variable est comme une "boîte" dans laquelle on peut stocker une information.</p>
+
+<p>En Python, on crée une variable en utilisant le signe <code>=</code>
+.</p>
+
+<pre><code class="language-python">nom = "Alice"
+age = 14
+print(nom, "a", age, "ans.")
+</code>
+</pre>
+
+<h2>2. Les types de variables</h2>
+
+<p>Il existe plusieurs types de variables :
+* <strong>Entiers (int)</strong>
+ : Les nombres entiers comme <code>42</code>
+
+* <strong>Flottants (float)</strong>
+ : Les nombres à virgule comme <code>3.14</code>
+
+* <strong>Chaînes de caractères (str)</strong>
+ : Le texte comme <code>"Bonjour"</code>
+</p>
+
+<h2>À vous de jouer !</h2>
+
+<p>Dans la console ci-dessous, essayez de créer deux variables <code>a</code>
+ et <code>b</code>
+, donnez-leur des nombres, puis affichez leur somme avec <code>print(a + b)</code>
+.</p>
+
+        </article>
+
+
+        
+        <section class="pyscript-terminal">
+            <h3>Console Interactive Python (PyScript)</h3>
+
+            <p>Utilisez cette console pour tester votre code Python directement dans le navigateur. Écrivez votre script
+                ci-dessous, puis cliquez sur le bouton <strong>Exécuter</strong>
+.</p>
+
+
+            
+            <script type="py-editor-active" id="main-editor">
+# Testez votre code ici !
+print("Bienvenue dans l'éditeur Python !")
+            </script>
+<py-editor id="py-editor-1" exec-id="0" root="py-editor-1" style="display: block;"><div class="py-editor-box" data-env="pyodide"><div class="py-editor-input" aria-label="Python Script Area"><button class="absolute py-editor-run-button" aria-label="Python Script Run Button"><svg style="height:24px;width:24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,12a1,1,0,0,1-.55.89l-10,5A1,1,0,0,1,8,18a1,1,0,0,1-.53-.15A1,1,0,0,1,7,17V7a1,1,0,0,1,1.45-.89l10,5A1,1,0,0,1,19,12Z" fill="#464646"></path>
+</svg>
+</button>
+<div>
+<SHADOW-ROOT>
+<style> :host { all: initial; }</style>
+<div class="cm-editor cm-focused ͼ1 ͼ2 ͼ4"><div class="cm-announced" aria-live="polite"></div>
+<div tabindex="-1" class="cm-scroller"><div class="cm-gutters cm-gutters-before" aria-hidden="true" style="min-height: 28px; position: sticky;"><div class="cm-gutter cm-lineNumbers"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">9</div>
+<div class="cm-gutterElement cm-activeLineGutter" style="height: 14px;">1</div>
+<div class="cm-gutterElement" style="height: 14px;">2</div>
+</div>
+<div class="cm-gutter cm-foldGutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><span title="Unfold line">›</span>
+</div>
+<div class="cm-gutterElement cm-activeLineGutter" style="height: 14px;"></div>
+</div>
+</div>
+<div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" contenteditable="true" style="tab-size: 4;" class="cm-content" role="textbox" aria-multiline="true" data-language="python"><div class="cm-activeLine cm-line"><span class="ͼm"># Testez votre code ici !</span>
+</div>
+<div class="cm-line">print(<span class="ͼe">"Bienvenue dans l'éditeur Python !"</span>
+)</div>
+</div>
+<div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true" style="z-index: 150; animation-duration: 1200ms;"><div class="cm-cursor cm-cursor-primary" style="left: 36.1562px; top: 5px; height: 15px;"></div>
+</div>
+<div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2;"></div>
+</div>
+</div>
+
+</SHADOW-ROOT>
+</div>
+</div>
+<div class="py-editor-output" id="py-editor-2-output"></div>
+</div>
+</py-editor>
+
+        </section>
+
+        
+    </main>
+
+    <script src="/static/theme.js"></script>
+
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Helper function to inject CSS into any element or shadow root
+            const injectCSS = (root, isDark) => {
+                let styleEl = root.querySelector('#pyscript-custom-overrides');
+
+                if (isDark) {
+                    if (!styleEl) {
+                        styleEl = document.createElement('style');
+                        styleEl.id = 'pyscript-custom-overrides';
+                        styleEl.textContent = `
+                            /* Hide badges regardless of class structure */
+                            a[href*="pyodide"], a[href*="pyscript"], a[href*="micropython"], .py-editor-badge, .polyscript-badge, .py-title {
+                                display: none !important;
+                                opacity: 0 !important;
+                                visibility: hidden !important;
+                            }
+                            
+                            /* Neutralize active line */
+                            .cm-activeLine, .cm-activeLineGutter, .cm-line, div[class*="activeLine"] {
+                                background-color: transparent !important;
+                            }
+                            
+                            /* White base text */
+                            .cm-content, .cm-content span { color: #ffffff !important; }
+                            
+                            /* Specific keyword colors */
+                            .cm-content span[class*="string"] { color: #A6E22E !important; }
+                            .cm-content span[class*="number"] { color: #AE81FF !important; }
+                            .cm-content span[class*="keyword"] { color: #F92672 !important; }
+                            .cm-content span[class*="comment"] { color: #75715E !important; }
+                            .cm-content span[class*="builtin"] { color: #66D9EF !important; }
+                        `;
+                        root.appendChild(styleEl);
+                    }
+                } else {
+                    if (styleEl) styleEl.remove();
+                }
+
+                // Forcefully remove text nodes of 'pyodide' if traversing child nodes
+                Array.from(root.querySelectorAll ? root.querySelectorAll('*') : []).forEach(el => {
+                    if (el.textContent && el.textContent.trim().toLowerCase() === 'pyodide' && el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE' && el.children.length === 0) {
+                        el.style.setProperty('display', 'none', 'important');
+                    }
+                });
+            };
+
+            const updatePyScriptTheme = () => {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+                // Inject in global document head just in case CodeMirror leaks into light DOM
+                injectCSS(document.head, isDark);
+
+                // Traverse ALL elements to find shadow roots (PyScript encapsulates CodeMirror heavily)
+                document.querySelectorAll('*').forEach(el => {
+                    if (el.shadowRoot) {
+                        injectCSS(el.shadowRoot, isDark);
+                    }
+                });
+
+                // Update standard theme attributes on known editor tags
+                document.querySelectorAll('py-editor, script[type="py-editor"]').forEach(editor => {
+                    if (isDark) {
+                        editor.setAttribute('theme', 'dark');
+                    } else {
+                        editor.removeAttribute('theme');
+                    }
+                });
+            };
+
+            // Observer les changements de thème
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                        updatePyScriptTheme();
+                    }
+                });
+            });
+
+            observer.observe(document.documentElement, { attributes: true });
+
+            // Apply continuously to ensure we catch PyScript rendering asynchronously
+            setInterval(updatePyScriptTheme, 500);
+        });
+    </script>
+
+
+
+<svg id="MJX-SVG-global-cache" style="display: none;"><defs></defs>
+</svg>
+</body>
