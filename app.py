@@ -24,16 +24,22 @@ def get_user(email, password):
 def get_courses_for_class(niveau_classe):
     """
     Parcourt le dossier 'cours' et liste les cours disponibles 
-    pour le niveau de l'élève.
+    pour le niveau de l'élève, y compris dans les sous-dossiers.
     """
     courses = {'Mathématiques': [], 'Informatique': []}
     for matiere in courses.keys():
         path = os.path.join(COURSES_DIR, matiere, niveau_classe)
         if os.path.isdir(path):
-            files = [f for f in os.listdir(path) if f.endswith('.md')]
-            # Remove extension
-            files_no_ext = [os.path.splitext(f)[0] for f in files]
-            courses[matiere] = files_no_ext
+            for root, dirs, files in os.walk(path):
+                for f in files:
+                    if f.endswith('.md'):
+                        # Chemin relatif par rapport au niveau
+                        rel_path = os.path.relpath(os.path.join(root, f), path)
+                        # Remove extension
+                        rel_path_no_ext = os.path.splitext(rel_path)[0]
+                        # Uniformise les séparateurs pour les URLs
+                        rel_path_no_ext = rel_path_no_ext.replace('\\', '/')
+                        courses[matiere].append(rel_path_no_ext)
     return courses
 
 @app.route('/')
@@ -71,7 +77,7 @@ def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
 
-@app.route('/cours/<matiere>/<chapitre>')
+@app.route('/cours/<matiere>/<path:chapitre>')
 def view_course(matiere, chapitre):
     if 'user' not in session:
         return redirect(url_for('login'))
