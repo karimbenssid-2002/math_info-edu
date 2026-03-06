@@ -31,7 +31,7 @@ def get_courses_for_class(niveau_classe):
         path = os.path.join(COURSES_DIR, matiere, niveau_classe)
         if os.path.isdir(path):
             items = []
-            for item in os.listdir(path):
+            for item in sorted(os.listdir(path)):
                 item_path = os.path.join(path, item)
                 if os.path.isdir(item_path):
                     items.append({'type': 'chapter', 'name': item})
@@ -55,11 +55,11 @@ def view_chapter(matiere, nom_chapitre):
         abort(404, description="Chapitre introuvable.")
         
     vignettes = {}
-    for item in os.listdir(chapter_path):
+    for item in sorted(os.listdir(chapter_path)):
         vignette_path = os.path.join(chapter_path, item)
         if os.path.isdir(vignette_path):
             files = []
-            for f in os.listdir(vignette_path):
+            for f in sorted(os.listdir(vignette_path)):
                 if f.endswith('.md'):
                     files.append(os.path.splitext(f)[0])
             vignettes[item] = files
